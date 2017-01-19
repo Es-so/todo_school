@@ -1,61 +1,34 @@
 import chai from 'chai';
-// import reducers from '../';
-import todos from '../todos';
-import { ADD_TODO, DEL_TODO, ADD_TASK, DEL_TASK } from '../../actions';
+import todosReducer from '../todos';
+import { todoAdded, todoDeleted } from '../../actions';
 
 const { describe, it } = global;
 const { expect } = chai;
 
+const initialState = [
+  { id: 0, label: '1st todo', mode: 1 },
+  { id: 1, label: '2nd todo', mode: 1 },
+];
 
-const initialState = {
-  todos: [
-    {
-      id: 1,
-      title: 'todo1',
-      mode: 1,
-    },
-  ],
-};
+const stateAfterAdd = [
+  { id: 0, label: '1st todo', mode: 1 },
+  { id: 1, label: '2nd todo', mode: 1 },
+  { id: 2, label: '3rd todo', mode: 1 },
+];
 
-describe('[UT] todo reducers', () => {
-  it('should handle a ADD_TODO', () => {
-    expect(
-      todos([], {
-        type: ADD_TODO,
-        todo: {
-          id: 2,
-          title: 'todo1',
-          mode: 1,
-        },
-      }),
-    ).to.deep.equal([
-      {
-        id: 2,
-        title: 'todo1',
-        mode: 1,
-      },
-    ]);
+const stateAfterDel = [
+  { id: 0, label: '1st todo', mode: 1 },
+];
+
+describe.only('[UT] todo reducers', () => {
+  it('should add a new todo', () => {
+    expect(todosReducer(
+      initialState, todoAdded({ id: 2, label: '3rd todo' })))
+      .to.deep.equal(stateAfterAdd);
   });
-  it('should handle a DEL_TODO', () => {
-    expect(
-      todos({
-        todos: [
-        {
-          id: 1,
-          title: 'todo1',
-          mode: 1,
-        },
-      ],
-      }, {
-        type: DEL_TODO,
-        todo: [
-        {
-          id: 1,
-          title: 'todo1',
-          mode: 1,
-        },
-      ],
-      }),
-    ).to.deep.equal({});
+  it('should delete a todo', () => {
+    expect(todosReducer(
+      initialState, todoDeleted({ id: 1 })))
+      .to.deep.equal(stateAfterDel);
   });
 });

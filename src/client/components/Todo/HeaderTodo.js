@@ -54,10 +54,7 @@ TaskSettings.propTypes = {
   setMode: React.PropTypes.func.isRequired,
 };
 
-const TodoHeader = ({ todo, tasks, todoActions, taskActions }) => {
-  const state = {
-    size: 'small',
-  };
+const TodoHeader = ({ todo, tasks, todoActions, taskActions, currentLoads }) => {
   const { addTask, delTask } = taskActions;
   const { delTodo, setMode } = todoActions;
   const handleDeleteC = () => {
@@ -70,7 +67,7 @@ const TodoHeader = ({ todo, tasks, todoActions, taskActions }) => {
 
   return (
     <TodoHead>
-      <MyModal todo={todo} addTask={addTask} />
+      <MyModal todo={todo} addTask={addTask} currentLoads={currentLoads} />
       <TaskSettings tasks={tasks} todo={todo} setMode={setMode} />
       <span style={{ marginLeft: '20px', marginRight: '20px' }} >
         <h2 style={{ display: 'inline' }} >
@@ -89,7 +86,7 @@ const TodoHeader = ({ todo, tasks, todoActions, taskActions }) => {
       <Button
         type="primary"
         icon="delete"
-        size={state.size}
+        size="small"
         style={{ marginLeft: '10px', marginRight: '10px', marginTop: '0px', float: 'right' }}
         onClick={handleDeleteC}
       >
@@ -104,6 +101,7 @@ TodoHeader.propTypes = {
   tasks: React.PropTypes.array.isRequired,
   todoActions: React.PropTypes.object.isRequired,
   taskActions: React.PropTypes.object.isRequired,
+  currentLoads: React.PropTypes.number.isRequired,
 };
 
 export default TodoHeader;

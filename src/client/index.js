@@ -8,6 +8,12 @@ import { loadTodos, loadTasks } from './actions';
 const initialState = {
   todos: [],
   tasks: [],
+  currentLoads: 0,
+  alert: {
+  	id: 0,
+    error: null,
+    type: 'error',
+  },
 };
 
 const store = configureStore(initialState);

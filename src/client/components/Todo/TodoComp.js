@@ -75,6 +75,7 @@ const TodoList = ({ initialState, todoActions, taskActions }) =>
           tasks={initialState.tasks}
           todoActions={todoActions}
           taskActions={taskActions}
+          currentLoads={initialState.currentLoads}
         />
 
         <TodoContent

@@ -3,9 +3,8 @@ import chai from 'chai';
 import { shallow } from 'enzyme';
 import App, { Title } from '../';
 import HeaderTodo from '../../Header/header';
-import AddTodo from '../../Todo/AddTodo';
-import TodoList from '../../Todo/TodoList';
-
+import AddTodo from '../../AddTodo/AddTodo';
+import TodoList from '../../Todo/TodoComp';
 
 const { describe, it } = global;
 const { expect } = chai;

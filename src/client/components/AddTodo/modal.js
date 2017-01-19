@@ -50,9 +50,31 @@ class MyModal extends React.Component {
     const { value } = this.state;
     return (
       <Wrapper>
-        <Button type="primary" size="small" style={{ marginRight: '5px', border: 'none' }} onClick={this.showModal}>+</Button>
-        <Modal title="Add Task" visible={this.state.visible} onOk={this.handleOk} onCancel={this.handleCancel} footer={[<button key="ValidButton" onClick={() => this.validateTask(todo.id, value)}>+</button>]} >
-          <TextInput placeholder="Add new task ..." onChange={this.handleChange} value={value} />
+        <Button
+          type="primary"
+          size="small"
+          style={{ marginRight: '5px', border: 'none' }}
+          onClick={this.showModal}
+        >
+          +
+        </Button>
+        <Modal
+          title="Add Task"
+          visible={this.state.visible}
+          onOk={this.handleOk}
+          onCancel={this.handleCancel}
+          footer={[<button
+                     key="ValidButton"
+                     onClick={() => this.validateTask(todo.id, value)}
+                   >
+                    +
+                   </button>]} 
+          >
+          <TextInput
+            placeholder="Add new task ..."
+            onChange={this.handleChange}
+            value={value}
+          />
         </Modal>
       </Wrapper>
     );
@@ -66,3 +88,34 @@ MyModal.propTypes = {
 
 
 export default MyModal;
+
+
+// import { Spin, Alert, Switch } from 'antd';
+
+// const Card = React.createClass({
+//   getInitialState() {
+//     return { loading: false };
+//   },
+//   toggle(value) {
+//     this.setState({ loading: value });
+//   },
+//   render() {
+//     const container = (
+//       <Alert
+//         message="Alert message title"
+//         description="Further details about the context of this alert."
+//         type="info"
+//       />
+//     );
+//     return (
+//       <div>
+//         <Spin spinning={this.state.loading} delay={500} >{container}</Spin>
+//         Loading state：<Switch checked={this.state.loading} onChange={this.toggle} />
+//       </div>
+//     );
+//   },
+// });
+
+// ReactDOM.render(
+//   <Card />
+// , mountNode);

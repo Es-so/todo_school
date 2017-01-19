@@ -7,8 +7,8 @@ import AddTodo from '../AddTodo/AddTodo';
 import TodoList from '../Todo/TodoComp';
 import allTheActions from '../../actions';
 
-const App = ({ todos, tasks, actions }) => {
-  const initialState = { todos, tasks };
+const App = ({ todos, tasks, currentLoads, actions }) => {
+  const initialState = { todos, tasks, currentLoads };
   const { delTodo, setMode, addTask, delTask, manageTask, updateTask } = actions;
   const todoActions = { delTodo, setMode };
   const taskActions = {
@@ -38,6 +38,7 @@ const mapDispatchToProps = dispatch => ({
 App.propTypes = {
   todos: React.PropTypes.array.isRequired,
   tasks: React.PropTypes.array.isRequired,
+  currentLoads: React.PropTypes.number.isRequired,
   actions: React.PropTypes.object.isRequired,
 };
 

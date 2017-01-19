@@ -29,7 +29,7 @@ class AddTodo extends React.Component {
   handleChange = event => this.setState({ value: event.target.value })
   handleClick = (value) => {
     const { addTodo } = this.props;
-    if (value === '') message.error('This is a message of error');
+    if (value === '') message.error('Please write a value');
     else {
       addTodo(value);
       this.setState({ value: '' });
@@ -50,7 +50,13 @@ class AddTodo extends React.Component {
     return (
       <Wrapper>
         <TextInput placeholder="Add a new Todo ..." onChange={this.handleChange} value={value} />
-        <Icon style={{ backgroundColor: iconeColor, color: fontColor }} onMouseOut={this.unsetBgColor} onMouseOver={this.changeBgColor} type="plus" onClick={() => this.handleClick(value)} />
+        <Icon
+          style={{ backgroundColor: iconeColor, color: fontColor }}
+          onMouseOut={this.unsetBgColor}
+          onMouseOver={this.changeBgColor}
+          type="plus"
+          onClick={() => this.handleClick(value)}
+        />
       </Wrapper>
     );
   }
