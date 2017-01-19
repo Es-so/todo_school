@@ -1,14 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import MyModal from '../AddTodo/modal';
-import Switch from 'antd/lib/switch';
-import Button from 'antd/lib/button';
-import Progress from 'antd/lib/progress';
-import Icon from 'antd/lib/icon';
-import Task from '../Task/ManageTask'
-import Dropdown from 'antd/lib/dropdown';
-import Menu from 'antd/lib/menu';
-import TodoHeader from './HeaderTodo'
+import Task from '../Task/ManageTask';
+import TodoHeader from './HeaderTodo';
 
 const Wrapper = styled.div`
   padding: 0px;
@@ -16,11 +9,11 @@ const Wrapper = styled.div`
   margin-top: 10px;
   text-align: center;
   width: auto;
-  min-width: 40%;
-  display: block;
   margin-left: auto;
   margin-right: auto;
-  display: table;
+  display: flex;
+  -webkit-flex-flow: row wrap;
+  justify-content: space-around;
 `;
 
 const TodoWrap = styled.div`
@@ -30,93 +23,74 @@ const TodoWrap = styled.div`
   margin-bottom: 4%;
   margin-top: 10px;
   text-align: center;
-  margin-left: auto;
-  margin-right: auto;
-  display: block;
+  margin-left: 5px;
+  margin-right: 5px;
 `;
 
-class TodoContent extends React.Component {
-  filterTasks = (task) =>  {
-    const { todo } = this.props;
+const TodoContent = ({ todo, tasks, taskActions }) => {
+  const { delTask, manageTask, updateTask } = taskActions;
+  const filterTasks = (task) => {
     switch (todo.mode) {
-      case '1':
+      case 1:
         return true;
-        break;
-      case '2':
+      case 2:
         return task.checked === false;
-        break;
-      case '3':
+      case 3:
         return task.checked;
-        break;
       default :
         return true;
     }
-  }
-  render () {
-    const { todo, tasks, delTask, manageTask, updateTask } = this.props;
-    return (
+  };
+  return (
     <div>
-      {((tasks.filter(task => task.todoId === todo.id))
-              .filter(this.filterTasks))
-             .map(task =>
-        <div style={{margin: '10px'}} key={task.id}>
-        <Task todo={todo}
-              task={task}
-              delTask={delTask}
-              manageTask={manageTask} 
-              updateTask={updateTask} />
-        </div>)}
-    </div>
-    )
-  }
-}
+      {
+      tasks.filter(task => task.listId === todo.id)
+      .filter(filterTasks)
+      .map(task =>
+        <div style={{ margin: '10px' }} key={task.id}>
+          <Task
+            todo={todo}
+            task={task}
+            delTask={delTask}
+            manageTask={manageTask}
+            updateTask={updateTask}
+          />
+        </div>)
+      }
+    </div>);
+};
 
 TodoContent.propTypes = {
   todo: React.PropTypes.object.isRequired,
   tasks: React.PropTypes.array.isRequired,
-  delTask: React.PropTypes.func.isRequired,
-  manageTask: React.PropTypes.func.isRequired,
-  updateTask: React.PropTypes.func.isRequired,
-}
+  taskActions: React.PropTypes.object.isRequired,
+};
 
-class TodoList extends React.Component {
-  render () {
-  const { store, onDel, addTask, delTask, manageTask, updateTask, setMode } = this.props;
-  const { state: { todos, tasks, mode } } = store;
+const TodoList = ({ initialState, todoActions, taskActions }) =>
+  <Wrapper>
+    {initialState.todos.map(todo =>
+      <TodoWrap key={todo.id}>
+        <TodoHeader
+          todo={todo}
+          tasks={initialState.tasks}
+          todoActions={todoActions}
+          taskActions={taskActions}
+        />
 
-  return (
-    <Wrapper>
-      {todos.map(todo =>
-        <TodoWrap key={todo.id}>
-          <TodoHeader todo={todo} 
-                      onDel={onDel} 
-                      addTask={addTask} 
-                      tasks={tasks} 
-                      mode={mode} 
-                      setMode={setMode} 
-                      delTask={delTask} />
-
-          <TodoContent todo={todo}
-                       tasks={tasks}
-                       delTask={delTask}
-                       manageTask={manageTask} 
-                       updateTask={updateTask} 
-                       mode={mode} />
-          <br />
-        </TodoWrap>)}
-    </Wrapper>
-    )
-  }
-}
+        <TodoContent
+          todo={todo}
+          tasks={initialState.tasks}
+          taskActions={taskActions}
+        />
+        <br />
+      </TodoWrap>)}
+  </Wrapper>
+;
 
 TodoList.propTypes = {
-  store: React.PropTypes.object.isRequired,
-  onDel: React.PropTypes.func.isRequired,
-  addTask: React.PropTypes.func.isRequired,
-  delTask: React.PropTypes.func.isRequired,
-  manageTask: React.PropTypes.func.isRequired,
-  setMode: React.PropTypes.func.isRequired,
+  initialState: React.PropTypes.object.isRequired,
+  todoActions: React.PropTypes.object.isRequired,
+  taskActions: React.PropTypes.object.isRequired,
 };
 
 export default TodoList;
-

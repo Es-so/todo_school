@@ -9,5 +9,4 @@
     "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
     "react/forbid-prop-types": [0, { "forbid": ['any', 'array', 'object'] }]
   },
-  "parser": "babel-eslint"
 }

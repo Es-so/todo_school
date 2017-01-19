@@ -15,30 +15,34 @@ const Wrapper = styled.section`
   background: whitesmoke;
 `;
 
-
 function handleChange(value) {
   console.log(`selected ${value}`);
 }
+
 const children = [];
-for (let i = 10; i < 36; i++) {
+for (let i = 10; i < 36; i += 1) {
   children.push(<Option key={i.toString(36) + i}>{i.toString(36) + i}</Option>);
 }
 
-const HeaderTodo = () => (
+const HeaderTodo = () =>
   <Wrapper>
     <Title>ToDo App</Title>
     <div>Filter Tags:
-    <Select
-    multiple
-    style={{ width: '100%' }}
-    placeholder="Please select"
-    defaultValue={['a10', 'c12']}
-    onChange={handleChange}
-  >
-    {children}
-  </Select>
-  </div>
+      <Select
+        multiple
+        style={{ width: '100%' }}
+        placeholder="Please select"
+        defaultValue={['a10', 'c12']}
+        onChange={handleChange}
+      >
+        {children}
+      </Select>
+    </div>
   </Wrapper>
-);
+;
+
+HeaderTodo.propTypes = {
+  initialState: React.PropTypes.object.isRequired,
+};
 
 export default HeaderTodo;

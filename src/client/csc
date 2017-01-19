@@ -1,0 +1,28 @@
+// const returnDouble = (value, x) => {
+// 	return (value * x);
+// }
+
+// const multiply = multiplier => value => multiplier*value
+//                     p            i           o
+// // high order function
+
+
+// const tt = [ x, ...dd ]
+
+// const rr = { ...ff , { [s] : x} }
+
+// const tab = [1, 2, 3]
+
+
+
+// const ff = tab.map(t => t*3 )
+
+// const _func = multipliy(3);
+
+// const ff = tab.map(_func)
+
+// const sum = reduce([1,2,3], (m,i) => m+i, 0)
+
+// const what = reduce([1,2,3], (m,i) => ({ ...m, [`${i}`]: i }), {})
+
+// {1: 1, 2: 2, 3: 3}

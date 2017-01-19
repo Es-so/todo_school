@@ -8,3 +8,6 @@ dist
 build
 *.log
 .nfs*
+.swp
+*~
+._*
