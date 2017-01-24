@@ -88,7 +88,7 @@ export const todoAdded = todo => ({
 });
 
 
-const addTodo = title => (dispatch) => {
+export const addTodo = title => (dispatch) => {
   const uri = 'api/todo/lists';
   const body = { todo: { label: title } };
   const options = { method: 'post', body, dispatch };
