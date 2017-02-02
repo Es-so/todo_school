@@ -26,7 +26,7 @@ const tasksLoaded = task => ({
 });
 
 export const loadTasks = () => (dispatch) => {
-  const uri = 'api/todo/tasks';
+  const uri = 'api/tasks';
   requestJson(uri).then(tasks => dispatch(tasksLoaded(tasks)));
 };
 
@@ -36,7 +36,7 @@ const taskAdded = task => ({
 });
 
 const addTask = (description, listId) => (dispatch) => {
-  const uri = 'api/todo/tasks';
+  const uri = 'api/tasks';
   const body = { task: { isCompleted: false, description, listId } };
   const options = { method: 'post', body, dispatch };
   requestJson(uri, options).then(task => dispatch(taskAdded(task)));
@@ -48,7 +48,7 @@ const taskDeleted = id => ({
 });
 
 const delTask = id => (dispatch) => {
-  const uri = `api/todo/task/${id}`;
+  const uri = `api/task/${id}`;
   const options = { method: 'DELETE', dispatch };
   return requestJson(uri, options).then(() => dispatch(taskDeleted(id)));
 };
@@ -74,7 +74,7 @@ const todosLoaded = todos => ({
 });
 
 export const loadTodos = () => (dispatch) => {
-  const uri = 'api/todo/lists';
+  const uri = 'api/todos';
   requestJson(uri)
     .then(todos => dispatch(todosLoaded(todos)))
     .catch((error) => {
@@ -89,7 +89,7 @@ export const todoAdded = todo => ({
 
 
 export const addTodo = title => (dispatch) => {
-  const uri = 'api/todo/lists';
+  const uri = 'api/todos';
   const body = { todo: { label: title } };
   const options = { method: 'post', body, dispatch };
   requestJson(uri, options).then(todo => dispatch(todoAdded(todo)));
@@ -103,7 +103,7 @@ export const todoDeleted = id => ({
 const delTodo = id => (dispatch, getState) => {
   const { tasks } = getState();
   const newTask = tasks.filter(task => task.listId === id);
-  const uri = `api/todo/list/${id}`;
+  const uri = `api/todos/${id}`;
   const options = { method: 'DELETE', dispatch };
   const tasksPromises = newTask.map(task => delTask(task.id)(dispatch));
   Promise.all([requestJson(uri, options), ...tasksPromises])
@@ -144,5 +144,7 @@ export default {
   updateTask,
   setMode,
   todoDeleted,
+  loadTodos,
+  loadTasks,
   addAlert,
 };

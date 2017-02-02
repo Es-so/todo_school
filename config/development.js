@@ -3,6 +3,7 @@ module.exports = {
   devtool: 'cheap-module-eval-source-map',
   devServer: {
     contentBase: './public',
+    buildPath: './build',
     historyApiFallback: true,
     hot: true,
     inline: true,

@@ -5,17 +5,19 @@ const checkStatus = (result) => {
   if (result.status !== 200) {
     throw new Error(result.statusText);
   }
+  // console.log(result);
   return result;
 };
 const parseJson = result => result.json();
 
-const requestJson = (uri, { method = 'GET', body, dispatch } = {}) => {
-  const absoluteUri = `http://rp3.redpelicans.com:4008/${uri}`;
+const requestJson = (uri , { method = 'GET', body, dispatch } = {}) => {
+  const absoluteUri = `http://0.0.0.0:3004/${uri}`;
   const params = { headers: { 'Content-Type': 'application/json' }, method };
   if (body) {
     params.body = JSON.stringify(body || {});
   }
   if (dispatch) dispatch(addLoading());
+  console.log(absoluteUri);
   return fetch(absoluteUri, params)
           .then(checkStatus)
           .then(parseJson)
