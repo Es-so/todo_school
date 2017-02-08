@@ -1,30 +1,15 @@
-import R from 'ramda'
 import express from 'express';
 import http from 'http';
-import path from 'path';
 import compression from 'compression';
 import bodyParser from 'body-parser';
 import morgan from 'morgan';
 import { error } from './middleware';
-import fs from 'fs'
 import initApi from '../api';
-
 
 const getUrl = (server) => `http://${server.address().address}:${server.address().port}`;
 
-const test = () => {
-  fs.readFile(path.join(__dirname, '../data.csv'), 'utf8', function (err,data) {
-    if (err) {
-      return console.log(err);
-    }
-    const rest = data.split('\n');
-    console.log(data);
-    return res.send(rest);
-  });
-}
-
 const initApp = (config = {}, models) => {
-  const { publicPath, buildPath, server } = config;
+  const { server } = config;
   const app = express();
   const httpServer = http.createServer(app);
   const promise = new Promise((resolve) => {

@@ -1,5 +1,4 @@
 import express from 'express';
-import R from 'ramda';
 
 const playSong = songs => (req, res) => {
   songs.play();

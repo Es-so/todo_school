@@ -3,3 +3,6 @@ coverage
 dist
 *.lock
 *.tmp
+._*
+.DS*
+.*DS*

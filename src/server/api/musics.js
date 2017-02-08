@@ -1,10 +1,7 @@
 import express from 'express';
-import R from 'ramda';
 
 const loadSongs = songs => (req, res) => {
-  if (req.query){
-  	res.json(songs.filteredSongs(req.query))
-  }else res.json(songs.load());
+  res.json(songs.load(req.query));
 };
 
 const addSong = songs => (req, res, next) => {
